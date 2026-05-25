@@ -31,9 +31,9 @@ export default function Navbar() {
             <Image
               src="/logos/logo-lobos.png"
               alt="Logo LobosFC"
-              width={100}
-              height={100}
-              className="w-[42px] md:w-[65px] h-auto object-contain"
+              width={120}
+              height={120}
+              className="w-[52px] md:w-[68px] h-auto object-contain"
               priority
             />
 
@@ -44,7 +44,7 @@ export default function Navbar() {
 
   <span className="text-white/40 text-[10px] uppercase tracking-[0.22em] mt-2">
     {t.socialImpactPlatform}
-  </span>
+    </span>
 </div>
           </a>
 
