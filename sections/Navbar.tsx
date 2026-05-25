@@ -112,18 +112,27 @@ export default function Navbar() {
 
               <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
                 <div className="flex items-center gap-3 text-xs uppercase tracking-widest text-white/70">
-                  {(["es", "en", "it", "ar"] as const).map((item) => (
+                 {[
+  { code: "es", flag: "/flags/es.svg" },
+  { code: "en", flag: "/flags/us.svg" },
+  { code: "it", flag: "/flags/it.svg" },
+  { code: "ar", flag: "/flags/ae.svg" },
+].map((item) => (
   <button
-    key={item}
+    key={item.code}
     onClick={() => {
-      setLang(item);
+      setLang(item.code as "es" | "en" | "it" | "ar");
       setIsOpen(false);
     }}
-    className={`hover:text-red-500 transition-all ${
-      lang === item ? "text-red-500" : ""
+    className={`transition-all ${
+      lang === item.code ? "opacity-100" : "opacity-50"
     }`}
   >
-    {item}
+    <img
+      src={item.flag}
+      alt={item.code}
+      className="w-7 h-7 rounded-full object-cover"
+    />
   </button>
 ))}
                 </div>
