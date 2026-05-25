@@ -11,7 +11,7 @@ type LanguageContextType = {
   t: TranslationType;
 };
 
-const defaultLang: Language = "en";
+const defaultLang: Language = "es";
 
 const LanguageContext = createContext<LanguageContextType>({
   lang: defaultLang,
