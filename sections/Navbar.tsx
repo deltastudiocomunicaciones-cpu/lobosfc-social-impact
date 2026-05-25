@@ -28,14 +28,16 @@ export default function Navbar() {
         <div className="backdrop-blur-xl bg-black/40 border border-white/10 rounded-full px-5 md:px-8 py-3 flex items-center justify-between">
 
           <a href="/" className="flex items-center gap-3 min-w-fit">
-            <Image
-              src="/logos/logo-lobos.png"
-              alt="Logo LobosFC"
-              width={120}
-              height={120}
-              className="w-[52px] md:w-[68px] h-auto object-contain"
-              priority
-            />
+
+  <div className="relative w-[58px] h-[58px] md:w-[68px] md:h-[68px]">
+    <Image
+      src="/logos/logo-lobos.png"
+      alt="Logo LobosFC"
+      fill
+      className="object-contain"
+      priority
+    />
+  </div>
 
            <div className="hidden md:flex flex-col leading-none">
   <span className="text-white font-black tracking-[0.18em] uppercase text-xs">
