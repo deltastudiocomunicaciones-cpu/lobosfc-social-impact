@@ -120,8 +120,14 @@ export default function WompiCheckout() {
 
     const data = await response.json();
 
-    const publicKey =
-      process.env.NEXT_PUBLIC_WOMPI_PUBLIC_KEY;
+    if (!data.signature) {
+  alert("No se pudo generar la firma de pago.");
+  return;
+}
+
+    const publicKey = "pub_prod_UCJixXANE6wzAxQlPyEgyjTg1XCDyxZ5";
+
+    
 
     const checkoutUrl =
       `https://checkout.wompi.co/p/?public-key=${publicKey}&currency=${currency}&amount-in-cents=${amountInCents}&reference=${reference}&signature:integrity=${data.signature}`;
