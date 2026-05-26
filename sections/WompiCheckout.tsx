@@ -93,9 +93,14 @@ export default function WompiCheckout() {
 
             </div>
 
-            <button className="w-full bg-red-600 hover:bg-red-700 transition-all py-5 rounded-full text-white font-bold uppercase tracking-[0.25em] text-sm">
-              {t.continuePayment}
-            </button>
+            <a
+  href="PEGA_AQUI_TU_LINK_DE_WOMPI"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex w-full items-center justify-center bg-red-600 hover:bg-red-700 transition-all py-5 rounded-full text-white font-bold uppercase tracking-[0.25em] text-sm"
+>
+  {t.continuePayment}
+</a>
 
           </div>
 
