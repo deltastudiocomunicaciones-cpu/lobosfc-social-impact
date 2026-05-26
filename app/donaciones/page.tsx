@@ -1,5 +1,6 @@
 "use client";
 
+import DonationForm from "@/sections/DonationForm";
 import { useLanguage } from "@/app/context/LanguageContext";
 
 import Navbar from "@/sections/Navbar";
@@ -58,6 +59,7 @@ export default function DonacionesPage() {
       <WhyDonate />
       <DonationsFlow />
       <CorporateCTA />
+      <DonationForm />
       <WompiCheckout />
       <Footer />
     </main>

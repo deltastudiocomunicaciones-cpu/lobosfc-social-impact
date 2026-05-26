@@ -99,7 +99,17 @@ export default function WompiCheckout() {
     const reference =
       `LOBOS-${Date.now()}`;
 
-    const amountInCents = 1000000;
+    const savedDonation = localStorage.getItem("lobosDonationData");
+
+const donationData = savedDonation
+  ? JSON.parse(savedDonation)
+  : null;
+
+const amount = donationData?.amount
+  ? Number(donationData.amount)
+  : 1000000;
+
+const amountInCents = amount * 100;
 
     const currency = "COP";
 
