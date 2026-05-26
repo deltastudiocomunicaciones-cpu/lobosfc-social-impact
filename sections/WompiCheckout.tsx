@@ -1,5 +1,6 @@
 "use client";
 
+import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function WompiCheckout() {
@@ -127,68 +128,84 @@ const donationData = savedDonation
             </div>
 
           <button
-  onClick={async () => {
+ onClick={async () => {
+  const savedDonation = localStorage.getItem("lobosDonationData");
 
-    const reference =
-      `LOBOS-${Date.now()}`;
+  const donationData = savedDonation ? JSON.parse(savedDonation) : null;
 
-    const savedDonation = localStorage.getItem("lobosDonationData");
+  if (!donationData) {
+    alert("Por favor registra primero los datos del donante.");
+    window.location.href = "#donor-form";
+    return;
+  }
 
-const donationData = savedDonation
-  ? JSON.parse(savedDonation)
-  : null;
+  if (!donationData.name || !donationData.email || !donationData.document) {
+    alert("Por favor completa nombre, correo y NIT/Cédula antes de continuar.");
+    window.location.href = "#donor-form";
+    return;
+  }
 
- if (!donationData) {
-  alert("Por favor registra primero los datos del donante.");
-  window.location.href = "#donor-form";
-  return;
-}
+  const reference = `LOBOS-${Date.now()}`;
 
-if (!donationData.name || !donationData.email || !donationData.document) {
-  alert("Por favor completa nombre, correo y NIT/Cédula antes de continuar.");
-  window.location.href = "#donor-form";
-  return;
-} 
+  const amount = donationData?.amount ? Number(donationData.amount) : 1000000;
 
-const amount = donationData?.amount
-  ? Number(donationData.amount)
-  : 1000000;
+  const amountInCents = amount * 100;
 
-const amountInCents = amount * 100;
+  const currency = "COP";
 
-    const currency = "COP";
+  const { error } = await supabase.from("donations").insert([
+    {
+      full_name: donationData.name,
+      company: donationData.company,
+      document: donationData.document,
+      email: donationData.email,
+      phone: donationData.phone,
+      amount: amount,
+      reference: reference,
+      status: "pending",
+    },
+  ]);
 
-    const response = await fetch(
-      "/api/wompi-signature",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          amountInCents,
-          currency,
-          reference,
-        }),
-      }
-    );
+  if (error) {
+    console.error(error);
+    alert("No se pudo registrar la donación.");
+    return;
+  }
 
-    const data = await response.json();
+  const response = await fetch("/api/wompi-signature", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      amountInCents,
+      currency,
+      reference,
+    }),
+  });
 
-    if (!data.signature) {
-  alert("No se pudo generar la firma de pago.");
-  return;
-}
+  const data = await response.json();
 
-    const publicKey = "pub_prod_UCJixXANE6wzAxQlPyEgyjTg1XCDyxZ5";
+  if (!data.signature) {
+    alert("No se pudo generar la firma de pago.");
+    return;
+  }
 
-    
+  const publicKey = "pub_prod_UCJixXANE6wzAxQlPyEgyjTg1XCDyxZ5";
 
-    const checkoutUrl =
-      `https://checkout.wompi.co/p/?public-key=${publicKey}&currency=${currency}&amount-in-cents=${amountInCents}&reference=${reference}&signature:integrity=${data.signature}`;
+  const checkoutUrl =
+    `https://checkout.wompi.co/p/?public-key=${publicKey}` +
+    `&currency=${currency}` +
+    `&amount-in-cents=${amountInCents}` +
+    `&reference=${reference}` +
+    `&signature:integrity=${data.signature}` +
+    `&customer-data:full-name=${encodeURIComponent(donationData.name)}` +
+    `&customer-data:email=${encodeURIComponent(donationData.email)}` +
+    `&customer-data:phone-number=${encodeURIComponent(donationData.phone)}` +
+    `&customer-data:legal-id=${encodeURIComponent(donationData.document)}`;
 
-    window.location.href = checkoutUrl;
-  }}
+  window.location.href = checkoutUrl;
+}}
 
   className="flex w-full items-center justify-center bg-red-600 hover:bg-red-700 transition-all py-5 rounded-full text-white font-bold uppercase tracking-[0.25em] text-sm"
 >
