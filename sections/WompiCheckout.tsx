@@ -83,7 +83,7 @@ export default function WompiCheckout() {
 
               <div className="border border-black/10 rounded-2xl px-6 py-5 flex justify-between items-center">
                 <span>{t.pseTransfer}</span>
-                <span>Banks Colombia</span>
+                <span>Bancolombia</span>
               </div>
 
               <div className="border border-black/10 rounded-2xl px-6 py-5 flex justify-between items-center">
@@ -93,22 +93,12 @@ export default function WompiCheckout() {
 
             </div>
 
-            <a
-  href="https://checkout.wompi.co/p/1b9c8e5f-8a0c-4b3d-9c3e-2a1f0e5d6c7f"
+           <a
+  href="https://checkout.wompi.co/l/zzhFsU"
   target="_blank"
   rel="noopener noreferrer"
   className="flex w-full items-center justify-center bg-red-600 hover:bg-red-700 transition-all py-5 rounded-full text-white font-bold uppercase tracking-[0.25em] text-sm"
 >
-<a
-  href="TU_LINK_REAL_DE_WOMPI"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="flex w-full items-center justify-center bg-red-600 hover:bg-red-700 transition-all py-5 rounded-full text-white font-bold uppercase tracking-[0.25em] text-sm"
->
-  {t.continuePayment}
-</a> 
-  className="flex w-full items-center justify-center bg-red-600 hover:bg-red-700 transition-all py-5 rounded-full text-white font-bold uppercase tracking-[0.25em] text-sm"
-
   {t.continuePayment}
 </a>
 
