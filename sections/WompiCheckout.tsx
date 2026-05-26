@@ -5,6 +5,15 @@ import { useLanguage } from "@/app/context/LanguageContext";
 export default function WompiCheckout() {
   const { t } = useLanguage();
 
+  const savedDonation =
+  typeof window !== "undefined"
+    ? localStorage.getItem("lobosDonationData")
+    : null;
+
+const donationData = savedDonation
+  ? JSON.parse(savedDonation)
+  : null;
+
   return (
     <section
       id="checkout"
@@ -52,14 +61,38 @@ export default function WompiCheckout() {
                 </span>
               </div>
 
+              <div className="flex justify-between border-b border-white/10 pb-4 gap-6">
+  <span className="text-gray-400">
+    Donante
+  </span>
+
+  <span className="font-semibold text-right">
+    {donationData?.name || "Pendiente"}
+  </span>
+</div>
+
+<div className="flex justify-between border-b border-white/10 pb-4 gap-6">
+  <span className="text-gray-400">
+    Empresa
+  </span>
+
+  <span className="font-semibold text-right">
+    {donationData?.company || "No registrada"}
+  </span>
+</div>
+
               <div className="flex justify-between border-b border-white/10 pb-4">
                 <span className="text-gray-400">
                   {t.estimatedAmount}
                 </span>
 
                 <span className="font-semibold">
-                  $5.000.000 COP
-                </span>
+  {new Intl.NumberFormat("es-CO").format(
+    donationData?.amount
+      ? Number(donationData.amount)
+      : 1000000
+  )} COP
+</span>
               </div>
 
             </div>
@@ -104,6 +137,18 @@ export default function WompiCheckout() {
 const donationData = savedDonation
   ? JSON.parse(savedDonation)
   : null;
+
+ if (!donationData) {
+  alert("Por favor registra primero los datos del donante.");
+  window.location.href = "#donor-form";
+  return;
+}
+
+if (!donationData.name || !donationData.email || !donationData.document) {
+  alert("Por favor completa nombre, correo y NIT/Cédula antes de continuar.");
+  window.location.href = "#donor-form";
+  return;
+} 
 
 const amount = donationData?.amount
   ? Number(donationData.amount)
