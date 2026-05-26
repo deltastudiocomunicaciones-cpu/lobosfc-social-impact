@@ -93,14 +93,46 @@ export default function WompiCheckout() {
 
             </div>
 
-           <a
-  href="https://checkout.wompi.co/l/zzhFsU"
-  target="_blank"
-  rel="noopener noreferrer"
+          <button
+  onClick={async () => {
+
+    const reference =
+      `LOBOS-${Date.now()}`;
+
+    const amountInCents = 1000000;
+
+    const currency = "COP";
+
+    const response = await fetch(
+      "/api/wompi-signature",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amountInCents,
+          currency,
+          reference,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    const publicKey =
+      process.env.NEXT_PUBLIC_WOMPI_PUBLIC_KEY;
+
+    const checkoutUrl =
+      `https://checkout.wompi.co/p/?public-key=${publicKey}&currency=${currency}&amount-in-cents=${amountInCents}&reference=${reference}&signature:integrity=${data.signature}`;
+
+    window.location.href = checkoutUrl;
+  }}
+
   className="flex w-full items-center justify-center bg-red-600 hover:bg-red-700 transition-all py-5 rounded-full text-white font-bold uppercase tracking-[0.25em] text-sm"
 >
   {t.continuePayment}
-</a>
+</button>
 
           </div>
 
