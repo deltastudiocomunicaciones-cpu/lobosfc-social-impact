@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "@/sections/Navbar";
 import Footer from "@/sections/Footer";
 
