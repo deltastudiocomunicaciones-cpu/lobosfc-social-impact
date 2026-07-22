@@ -1,19 +1,20 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function WompiCheckout() {
   const { t } = useLanguage();
+  const [donationData, setDonationData] = useState<any>(null);
 
-  const savedDonation =
-  typeof window !== "undefined"
-    ? localStorage.getItem("lobosDonationData")
-    : null;
+  useEffect(() => {
+    const savedDonation = localStorage.getItem("lobosDonationData");
 
-const donationData = savedDonation
-  ? JSON.parse(savedDonation)
-  : null;
+    if (savedDonation) {
+      setDonationData(JSON.parse(savedDonation));
+    }
+  }, []);
 
   return (
     <section
