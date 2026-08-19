@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/app/context/LanguageContext";
+import Link from "next/link";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -25,10 +26,11 @@ export default function Footer() {
 </h3>
 
           <ul className="space-y-3 text-gray-400">
-            <li><a href="/#mission" className="hover:text-red-500 transition-all">{t.mission}</a></li>
-            <li><a href="/#programs" className="hover:text-red-500 transition-all">{t.programs}</a></li>
-            <li><a href="/#impact" className="hover:text-red-500 transition-all">{t.impact}</a></li>
-            <li><a href="/#transparency" className="hover:text-red-500 transition-all">{t.transparency}</a></li>
+            <li><Link href="/#mission" className="hover:text-red-500 transition-all">{t.mission}</Link></li>
+            <li><Link href="/#programs" className="hover:text-red-500 transition-all">{t.programs}</Link></li>
+            <li><Link href="/#impact" className="hover:text-red-500 transition-all">{t.impact}</Link></li>
+            <li><Link href="/transparencia" className="hover:text-red-500 transition-all">{t.transparency}</Link></li>
+            <li><Link href="/transparencia/rte-2026" className="hover:text-red-500 transition-all">RTE 2026</Link></li>
           </ul>
         </div>
 
@@ -93,12 +95,12 @@ export default function Footer() {
             
 
             <li>
-              <a
+              <Link
               href="/#official-allies"
               className="hover:text-red-500 transition-all block mt-6"
             >
             {t.becomeSponsor}
-             </a>
+             </Link>
             </li>
           </ul>
         </div>
@@ -106,8 +108,8 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between gap-4 text-sm text-gray-500">
-        <p>© 2026 {t.foundationName}. {t.footerRights}</p>
-        <p>{t.footerPowered}</p>
+        <div><p>© 2026 {t.foundationName}. {t.footerRights}</p><p className="mt-2">NIT 901696551</p></div>
+        <div className="md:text-right"><Link href="/transparencia/rte-2026" className="hover:text-white transition-all">Régimen Tributario Especial — RTE 2026</Link><p className="mt-2">{t.footerPowered}</p></div>
       </div>
     </footer>
   );

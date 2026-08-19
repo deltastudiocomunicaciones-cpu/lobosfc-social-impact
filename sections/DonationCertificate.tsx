@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/app/context/LanguageContext";
+import { rteConfig } from "@/app/data/rte";
 
 export default function DonationCertificate() {
   const { t } = useLanguage();
@@ -9,7 +10,7 @@ export default function DonationCertificate() {
     t.certificateCard1,
     t.certificateCard2,
     t.certificateCard3,
-    t.certificateCard4,
+    ...(rteConfig.rteQualified ? [t.certificateCard4] : []),
     t.certificateCard5,
     t.certificateCard6,
   ];
@@ -31,11 +32,11 @@ export default function DonationCertificate() {
           </h2>
 
           <p className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-xl mb-10">
-            {t.certificateText}
+            {rteConfig.rteQualified ? t.certificateText : "Cada aporte puede contar con registro institucional y trazabilidad contable. La eventual emisión de certificados con efectos tributarios dependerá de la calificación vigente en el RTE y del cumplimiento de los requisitos aplicables."}
           </p>
 
           <p className="text-sm text-gray-500 leading-relaxed">
-            {t.certificateLegal}
+            {rteConfig.rteQualified ? t.certificateLegal : "Proceso RTE 2026: solicitud de calificación en preparación. Esta sección no constituye una promesa de beneficio tributario."}
           </p>
 
         </div>

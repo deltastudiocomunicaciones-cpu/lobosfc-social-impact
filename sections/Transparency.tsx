@@ -2,15 +2,11 @@
 
 import { useLanguage } from "@/app/context/LanguageContext";
 
-const documents = [
-  "RUT",
-  "Cámara de comercio",
-  "Estatutos",
-  "Junta directiva",
-  "Estados financieros",
-  "Informes de gestión",
-  "Política de datos",
-  "Documentos RTE",
+const areas = [
+  { title: "Régimen Tributario Especial — RTE", status: "Calificación 2026", href: "/transparencia/rte-2026" },
+  { title: "Información institucional", status: "En preparación", href: "/transparencia" },
+  { title: "Información financiera", status: "En preparación", href: "/transparencia" },
+  { title: "Gestión e impacto", status: "Próxima publicación", href: "/transparencia" },
 ];
 
 export default function Transparency() {
@@ -39,15 +35,17 @@ export default function Transparency() {
         </div>
 
         <div className="grid gap-4">
-          {documents.map((doc, index) => (
-            <div
-              key={index}
+          {areas.map((area) => (
+            <a
+              key={area.title}
+              href={area.href}
               className="bg-white border border-black/10 rounded-2xl px-6 py-5 flex justify-between items-center hover:border-red-600 transition-all"
             >
-              <span className="font-semibold">{doc}</span>
-              <span className="text-red-600 font-bold">PDF</span>
-            </div>
+              <span className="font-semibold">{area.title}</span>
+              <span className="text-red-600 text-xs uppercase tracking-wider font-bold text-right">{area.status} →</span>
+            </a>
           ))}
+          <a href="/transparencia" className="mt-4 inline-flex justify-center rounded-full bg-black text-white px-7 py-4 uppercase tracking-[0.2em] text-xs font-bold hover:bg-red-600 transition-all">Abrir portal de Transparencia</a>
         </div>
       </div>
     </section>

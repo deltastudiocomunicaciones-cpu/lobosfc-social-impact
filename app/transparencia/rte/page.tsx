@@ -1,0 +1,8 @@
+import Link from "next/link";
+import Navbar from "@/sections/Navbar";
+import Footer from "@/sections/Footer";
+
+export default function RteHistoryPage() {
+  return <main className="bg-black text-white min-h-screen"><Navbar /><section className="pt-48 pb-24 px-6 bg-[radial-gradient(circle_at_75%_25%,rgba(220,38,38,0.18),transparent_32%)]"><div className="max-w-7xl mx-auto"><p className="uppercase tracking-[0.4em] text-red-500 text-sm mb-6">Registro Web</p><h1 className="text-6xl md:text-8xl font-black tracking-[-0.06em] leading-[0.9] max-w-5xl">Régimen Tributario Especial</h1><p className="text-xl text-gray-400 mt-10 max-w-2xl leading-relaxed">Histórico público de solicitudes y actualizaciones organizadas por vigencia.</p></div></section>
+    <section className="bg-[#f3f1ec] text-black px-6 py-24"><div className="max-w-7xl mx-auto"><Link href="/transparencia/rte-2026" className="group bg-white border-t-4 border-red-600 p-8 md:p-12 grid md:grid-cols-[220px_1fr_160px] gap-8 items-center hover:shadow-2xl transition-all"><strong className="text-6xl md:text-8xl font-black">2026</strong><div><p className="uppercase tracking-[0.25em] text-xs text-gray-500">Proceso inicial</p><h2 className="text-3xl md:text-5xl font-black my-3">Solicitud de Calificación RTE</h2><p className="text-amber-700">Estado: En preparación</p></div><span className="uppercase tracking-[0.2em] text-xs font-bold group-hover:text-red-600">Consultar →</span></Link><div className="border border-black/10 border-t-0 p-8 text-gray-600"><strong className="uppercase tracking-[0.2em] text-xs">Próximas vigencias</strong><p className="mt-3">Las actualizaciones futuras se incorporarán a este histórico sin eliminar la información de 2026.</p></div></div></section><Footer /></main>;
+}
