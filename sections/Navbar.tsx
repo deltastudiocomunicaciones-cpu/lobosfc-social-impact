@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import LanguageSwitcher from "@/app/components/LanguageSwitcher";
 import { useLanguage } from "@/app/context/LanguageContext";
@@ -14,7 +15,7 @@ export default function Navbar() {
     { label: t.mission, href: "/#mission" },
     { label: t.programs, href: "/#programs" },
     { label: t.impact, href: "/#impact" },
-    { label: t.transparency, href: "/#transparency" },
+    { label: t.transparency, href: "/transparencia" },
   ];
 
   return (
@@ -27,7 +28,7 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-4 md:px-6 py-4 md:py-5">
         <div className="backdrop-blur-xl bg-black/40 border border-white/10 rounded-full px-5 md:px-8 py-3 flex items-center justify-between">
 
-          <a href="/" className="flex items-center gap-3 min-w-fit">
+          <Link href="/" className="flex items-center gap-3 min-w-fit">
 
   <div className="relative w-[58px] h-[58px] md:w-[68px] md:h-[68px]">
     <Image
@@ -48,10 +49,10 @@ export default function Navbar() {
     {t.socialImpactPlatform}
     </span>
 </div>
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8 ml-auto">
-            <nav className="flex items-center gap-9 text-[12px] uppercase tracking-[0.25em] text-white/75">
+            <nav className="flex items-center gap-6 text-[11px] uppercase tracking-[0.2em] text-white/75">
               {links.map((link) => (
                 <a
                   key={link.href}

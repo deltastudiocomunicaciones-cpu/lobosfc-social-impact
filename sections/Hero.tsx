@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useLanguage } from "@/app/context/LanguageContext";
+import Link from "next/link";
 
 export default function Hero() {
   const { t } = useLanguage();
@@ -58,19 +59,19 @@ export default function Hero() {
           transition={{ delay: 1.2, duration: 1 }}
           className="mt-12 flex flex-col md:flex-row gap-4 justify-center"
         >
-          <a
+          <Link
             href="/donaciones#checkout"
             className="bg-red-600 hover:bg-red-700 transition-all px-8 py-4 rounded-full font-semibold text-lg text-white"
           >
             {t.donateNow}
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/#mission"
             className="border border-white/20 hover:border-white transition-all px-8 py-4 rounded-full font-semibold text-lg text-white"
           >
             {t.ourMission}
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

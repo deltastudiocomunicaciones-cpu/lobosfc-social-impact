@@ -23,16 +23,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Language>(defaultLang);
 
   useEffect(() => {
-    const savedLang = localStorage.getItem("lobosfc-lang");
-
-    if (
-      savedLang === "es" ||
-      savedLang === "en" ||
-      savedLang === "it" ||
-      savedLang === "ar"
-    ) {
-      setLangState(savedLang);
-    }
+    const frame = requestAnimationFrame(() => {
+      const savedLang = localStorage.getItem("lobosfc-lang");
+      if (savedLang === "es" || savedLang === "en" || savedLang === "it" || savedLang === "ar") setLangState(savedLang);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const setLang = (newLang: Language) => {

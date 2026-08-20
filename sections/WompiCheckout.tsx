@@ -4,16 +4,19 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useLanguage } from "@/app/context/LanguageContext";
 
+type DonationData = { name?: string; company?: string; document?: string; email?: string; phone?: string; amount?: string | number };
+
 export default function WompiCheckout() {
   const { t } = useLanguage();
-  const [donationData, setDonationData] = useState<any>(null);
+  const [donationData, setDonationData] = useState<DonationData | null>(null);
 
   useEffect(() => {
     const savedDonation = localStorage.getItem("lobosDonationData");
 
-    if (savedDonation) {
-      setDonationData(JSON.parse(savedDonation));
-    }
+    const frame = requestAnimationFrame(() => {
+      if (savedDonation) setDonationData(JSON.parse(savedDonation) as DonationData);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   return (
@@ -153,6 +156,11 @@ export default function WompiCheckout() {
   const amountInCents = amount * 100;
 
   const currency = "COP";
+
+  if (!supabase) {
+    alert("La conexión de donaciones no está configurada. Intenta nuevamente más tarde.");
+    return;
+  }
 
   const { error } = await supabase.from("donations").insert([
     {

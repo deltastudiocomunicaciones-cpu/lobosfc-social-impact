@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/app/context/LanguageContext";
+import { rteConfig } from "@/app/data/rte";
 
 export default function Donations() {
   const { t } = useLanguage();
@@ -29,7 +30,7 @@ export default function Donations() {
         </p>
 
         <p className="text-gray-500 max-w-3xl mx-auto leading-relaxed mb-14">
-          {t.donationsDescription}
+          {rteConfig.rteQualified ? t.donationsDescription : "Ingresa al portal de donaciones para conocer las formas de vinculación, la trazabilidad institucional y el estado público del proceso RTE 2026."}
         </p>
 
         <a
